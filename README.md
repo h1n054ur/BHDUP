@@ -59,3 +59,5 @@ cp .env.example .env
 - Assumes all directories are named correctly and media files are one directory deep.
 
 - Logo made with courtesy of https://www.freelogodesign.org/
+
+- Tried incorporating the colors of the rainbow in support of my LGBTQ+ fam out there!!
