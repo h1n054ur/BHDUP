@@ -1,0 +1,23 @@
+# Script depends on a few programs being called from system these include ffmpeg, mktorrent and imgbox-cli make sure all are installed and working before running the script
+#
+# For imgbox-cli install requirements below then "pipx install imgbox-cli"
+#
+# To install all required python modules:
+#
+# pip install -r requirements.txt
+#
+# If that doesnt work you can try
+#
+# pip3 install -r requirements.txt
+#
+# If all else fails just pip3 install the requirements individually
+#
+# Python version 3.9
+pipx
+requests
+guessit
+colorama
+python-dotenv
+tqdm
+tmdbv3api
+imdbpy
