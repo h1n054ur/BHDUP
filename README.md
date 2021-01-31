@@ -9,7 +9,7 @@ Script to Automate Uploading using BHDAPI written using python 3.8 (mostly)
 
 ## Usage:
 
-You will need 3 keys to run this script google how to register for tmdbv3api its free, the other two ask in the forums if you are unsure.
+You will need 3 keys to run this script, google how to register for tmdbv3api its free, the other two ask in the forums if you are unsure.
 
 Rename directories according to BHD naming conventions.
 
