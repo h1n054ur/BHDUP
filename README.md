@@ -5,7 +5,7 @@
 # BHDUP
 
 
-Script to Automate Uploading using BHDAPI written using python 3.8 (mostly)
+Script to Automate Uploading using BHDAPI written using python 3.9 (mostly)
 
 ## Usage:
 
