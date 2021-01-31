@@ -46,7 +46,7 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
-9. **Update `.env` file to have YOUR KEYS and change Screenshot times if you need follow the format in .env.example .**
+6. **Update `.env` file to have YOUR KEYS and change Screenshot times if you need follow the format in .env.example .**
 
 ## Notes:
 
