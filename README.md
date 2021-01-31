@@ -15,7 +15,7 @@ Rename directories according to BHD naming conventions.
 
 Run it from inside directory where you have all properly named releases make sure BHDUP.py and .env are in the same directory.
 
-    python3 BHDUP.py  or python3 /path/to/BHDUP.py
+    python3 bhdup.py  or python3 /path/to/bhdup.py
 
 
 ## Install
