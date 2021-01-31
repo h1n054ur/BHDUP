@@ -13,7 +13,7 @@ You will need 3 keys to run this script, google how to register for tmdbv3api it
 
 Rename directories according to BHD naming conventions.
 
-Run it from inside directory where you have all properly named releases make sure BHDUP.py and .env are in the same directory.
+Run it from inside directory where you have all properly named releases make sure bhdup.py and .env are in the same directory.
 
     python3 bhdup.py  or python3 /path/to/bhdup.py
 
