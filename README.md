@@ -5,7 +5,7 @@
 # BHDUP
 
 
-Script to Automate Uploading using BHDAPI
+Script to Automate Uploading using BHDAPI written using python 3.8 (mostly)
 
 ## Usage:
 
@@ -36,10 +36,9 @@ I'm going to pretend you have no python experience.
 4. Install the requirements.
 5. Copy .env.example to .env
 
-Steps 1-8:
+Steps 1-5:
 
 ```
-python --version
 python3 --version
 git clone https://github.com/fachizel/BHDUP.git
 cd BHDUP
@@ -55,7 +54,7 @@ cp .env.example .env
 
       rm -r *.files tmp mediainfo.txt *.torrent
 
-- Only works for UHD Remux, BD Remux, DVD Remux, 2160p, 1080p and 720p, Might include missing categories later.
+- Only works with UHD Remux, BD Remux, DVD Remux, 2160p, 1080p and 720p, Might include missing categories later.
 
 - Assumes all directories are named correctly and media files are one directory deep.
 
