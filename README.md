@@ -56,7 +56,7 @@ cp .env.example .env
 
 - Only works with UHD Remux, BD Remux, DVD Remux, 2160p, 1080p and 720p, Might include missing categories later.
 
-- Assumes all directories are named correctly and media files are one directory deep.
+- Assumes all directories are named correctly and media files are one directory deep, and no whitespaces in names that will confuse mktorrent.
 
 - Logo made with courtesy of https://www.freelogodesign.org/
 
