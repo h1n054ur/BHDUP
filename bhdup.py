@@ -53,7 +53,6 @@ url = str(bhdurl + bhdapi)
 a = os.listdir()
 torrents = sorted(a)
 torrents.remove("bhdup.py")
-torrents.remove("requirements.txt")
 torrents.remove(".env")
 
 # SCREENSHOT FUNCTION
