@@ -52,7 +52,7 @@ cp .env.example .env
 
 - If you mess up and get stuck with a ton of temp files and want to delete them all from the current directory before re-running the script, use this handy command:
 
-      rm -r *.files tmp mediainfo.txt *.torrent
+      rm -r *.files tmp *.png mediainfo.txt *.torrent
 
 - Only works with UHD Remux, BD Remux, DVD Remux, 2160p, 1080p and 720p, Might include missing categories later.
 
