@@ -50,7 +50,7 @@ cp .env.example .env
 
 ## Notes:
 
-- If you mess up and get stuck with a ton of temp files and want to delete them all from the current directory before re-running the script, use the handy command:
+- If you mess up and get stuck with a ton of temp files and want to delete them all from the current directory before re-running the script, use this handy command:
 
       rm -r *.files tmp mediainfo.txt *.torrent
 
