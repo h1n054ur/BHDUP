@@ -17,6 +17,7 @@ Run it from inside directory where you have all properly named releases make sur
 
     python3 bhdup.py  or python3 /path/to/bhdup.py
 
+Make sure there is nothing other than the Directories you want to make torrents of, the .env and the bhdup.py files in your current working directory.
 
 ## Install
 
