@@ -50,8 +50,7 @@ while ((anon != 0) and (anon != 1)):
 # MORE VARIABLES
 bhdurl = "https://beyond-hd.me/api/upload/"
 url = str(bhdurl + bhdapi)
-a = os.listdir()
-torrents = sorted(a)
+torrents = sorted(os.listdir())
 torrents.remove("bhdup.py")
 torrents.remove(".env")
 
