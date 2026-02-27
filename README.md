@@ -89,6 +89,8 @@ working-directory/
 - 2160p, 1080p, 720p
 - WEB sources
 
+> **Note:** Torrent piece size is currently hardcoded to `2^24` (16 MiB). This works well for most file sizes but may need tuning for very large or very small releases.
+
 ## Cleanup
 
 If a run fails and leaves temp files:
