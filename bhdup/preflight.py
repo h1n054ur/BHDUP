@@ -14,17 +14,27 @@ REQUIRED_BINARIES = {
 }
 
 
-def check_binaries() -> None:
+def check_binaries(verbose: bool = False) -> None:
     """Verify all required external tools are installed.
 
     Prints a clear message for each missing binary and exits
-    if any are not found.
+    if any are not found. When verbose is True, also prints
+    the resolved path for each found binary.
     """
     missing: list[str] = []
+    found: list[str] = []
 
     for binary, purpose in REQUIRED_BINARIES.items():
-        if shutil.which(binary) is None:
+        path = shutil.which(binary)
+        if path is None:
             missing.append(f"  - {binary}: {purpose}")
+        else:
+            found.append(f"  - {binary}: {path}")
+
+    if found and verbose:
+        print("Found required binaries:")
+        for line in found:
+            print(line)
 
     if missing:
         print("Error: missing required system binaries:", file=sys.stderr)
