@@ -13,6 +13,14 @@ import os
 REQUIRED_KEYS = ["TORRENTPASSKEY", "BHDAPI", "TMDBAPI"]
 SCREENSHOT_KEYS = [f"SCREEN_SHOT{i}" for i in range(1, 7)]
 TIME_PATTERN = re.compile(r"^\d{2}:\d{2}:\d{2}$")
+DEFAULT_SCREENSHOT_TIMES = [
+    "00:02:45",
+    "00:05:45",
+    "00:08:45",
+    "00:11:45",
+    "00:14:45",
+    "00:17:45",
+]
 
 
 def load_config(env_path: Path | None = None) -> dict[str, str]:
@@ -45,12 +53,14 @@ def load_config(env_path: Path | None = None) -> dict[str, str]:
         sys.exit(1)
 
     bad_times: list[str] = []
-    for key in SCREENSHOT_KEYS:
+    for i, key in enumerate(SCREENSHOT_KEYS):
         value = os.getenv(key, "").strip()
         if value:
             if not TIME_PATTERN.match(value):
                 bad_times.append(f"{key}={value}")
             config[key] = value
+        else:
+            config[key] = DEFAULT_SCREENSHOT_TIMES[i]
 
     if bad_times:
         print(
