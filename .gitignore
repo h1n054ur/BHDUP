@@ -12,6 +12,7 @@ venv/
 # BHDUP temp files
 *.torrent
 *.png
+*.log
 mediainfo.txt
 tmp
 *.files/
