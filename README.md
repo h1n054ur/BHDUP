@@ -1,66 +1,102 @@
-[![h1n054ur - BHDUP](https://img.shields.io/static/v1?label=h1n054ur&message=BHDUP&color=blue&logo=github)](https://github.com/h1n054ur/BHDUP)
-[![stars - BHDUP](https://img.shields.io/github/stars/h1n054ur/BHDUP?style=social)](https://github.com/h1n054ur/BHDUP)
-[![forks - BHDUP](https://img.shields.io/github/forks/h1n054ur/BHDUP?style=social)](https://github.com/h1n054ur/BHDUP)
-
 <h1 align="center">
 	<img width="400" src="bhdup-logo.png" alt="BHDUP">
 </h1>
 
-# BHDUP
+<p align="center">
+  <strong>Automated media uploading tool for BHD</strong>
+</p>
 
+<p align="center">
+  <a href="https://github.com/h1n054ur/BHDUP"><img src="https://img.shields.io/github/stars/h1n054ur/BHDUP?style=social" alt="Stars"></a>
+  <a href="https://github.com/h1n054ur/BHDUP"><img src="https://img.shields.io/github/forks/h1n054ur/BHDUP?style=social" alt="Forks"></a>
+  <a href="https://github.com/h1n054ur/BHDUP/blob/main/LICENSE"><img src="https://img.shields.io/github/license/h1n054ur/BHDUP" alt="License"></a>
+</p>
 
-Script to Automate Uploading using BHDAPI written using python 3.9 (mostly)
+---
 
-## Usage:
+BHDUP automates the process of creating torrents, generating screenshots, extracting mediainfo, and uploading releases to BHD via their API. It handles TMDB/IMDb lookups, imgbox thumbnail hosting, and supports both movie and TV categories.
 
-You will need 3 keys to run this script, google how to register for tmdbv3api its free, the other two ask in the forums if you are unsure.
+## Prerequisites
 
-Rename directories according to BHD naming conventions.
+| Tool | Purpose | Install |
+|------|---------|---------|
+| Python | >= 3.11 | [python.org](https://www.python.org/downloads/) |
+| ffmpeg | Screenshot generation | `apt install ffmpeg` / `brew install ffmpeg` |
+| mktorrent | Torrent file creation | [github.com/Rudde/mktorrent](https://github.com/Rudde/mktorrent) |
+| mediainfo | Media metadata extraction | `apt install mediainfo` / `brew install mediainfo` |
+| imgbox-cli | Screenshot hosting | `pipx install imgbox-cli` |
 
-Run it from inside directory where you have all properly named releases make sure bhdup.py and .env are in the same directory.
+## Quick Start
 
-    python3 bhdup.py  or python3 /path/to/bhdup.py
-
-Make sure there is nothing other than the Directories you want to make torrents of, the .env and the bhdup.py files in your current working directory.
-
-## Install
-
-I'm going to pretend you have no python experience.
-
-0.1 **Install mktorrent:** https://github.com/Rudde/mktorrent
-
-0.2 **Install ffmpeg:** https://github.com/FFmpeg/FFmpeg
-
-0.3 **Install mediainfo:** https://github.com/MediaArea/MediaInfoLib
-
-0.4 **Install imgbox-cli:** https://github.com/plotski/imgbox-cli
-
-1. Check which python you have.
-2. Clone this repo.
-3. Go into this repo.
-4. Install the requirements.
-5. Copy .env.example to .env
-
-Steps 1-5:
-
-```
-python3 --version
-git clone https://github.com/fachizel/BHDUP.git
+```bash
+# Clone the repo
+git clone https://github.com/h1n054ur/BHDUP.git
 cd BHDUP
-pip install -r requirements.txt
+
+# Set up a virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Install dependencies
+pip install -e .
+
+# Configure
 cp .env.example .env
+# Edit .env with your API keys (see Configuration below)
 ```
 
-6. **Update `.env` file to have YOUR KEYS and change Screenshot times if you need follow the format in .env.example .**
+## Configuration
 
-## Notes:
+Edit `.env` with your credentials:
 
-- If you mess up and get stuck with a ton of temp files and want to delete them all from the current directory before re-running the script, use this handy command:
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `TORRENTPASSKEY` | Yes | Your BHD torrent passkey |
+| `BHDAPI` | Yes | Your BHD API key |
+| `TMDBAPI` | Yes | TMDB v3 API key ([free registration](https://www.themoviedb.org/settings/api)) |
+| `SCREEN_SHOT1` - `SCREEN_SHOT6` | No | Screenshot timestamps in `HH:MM:SS` format (defaults provided) |
 
-      rm -r *.files tmp *.png mediainfo.txt *.torrent
+## Usage
 
-- Only works with UHD Remux, BD Remux, DVD Remux, 2160p, 1080p and 720p, Might include missing categories later.
+```bash
+# Run from a directory containing properly named release folders
+python3 bhdup.py
+```
 
-- Assumes all directories are named correctly, media files are one directory deep, and no whitespaces in names that will confuse mktorrent.
+The script will prompt for:
+- **Category**: Movie (1) or TV (2)
+- **Pack**: Season pack or single (TV only)
+- **Live**: Upload live or save as draft
+- **Anonymous**: Upload anonymously or not
 
-- Logo made with courtesy of https://www.freelogodesign.org/
+### Directory Structure
+
+```
+working-directory/
+├── Release.Name.2024.1080p.BluRay.Remux/
+│   └── movie.mkv
+├── Another.Release.2024.2160p.UHD.Remux/
+│   └── movie.mkv
+├── bhdup.py
+└── .env
+```
+
+## Supported Formats
+
+- UHD Remux (2160p Blu-ray)
+- BD Remux (1080p Blu-ray)
+- DVD Remux
+- 2160p, 1080p, 720p
+- WEB sources
+
+## Cleanup
+
+If a run fails and leaves temp files:
+
+```bash
+rm -r *.files tmp *.png mediainfo.txt *.torrent
+```
+
+## License
+
+[GPL-3.0](LICENSE)
