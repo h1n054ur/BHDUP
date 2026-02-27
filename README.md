@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <strong>Automated media uploading tool for BHD</strong>
+  <strong>Media upload automation tool</strong>
 </p>
 
 <p align="center">
@@ -14,90 +14,76 @@
 
 ---
 
-BHDUP automates the process of creating torrents, generating screenshots, extracting mediainfo, and uploading releases to BHD via their API. It handles TMDB/IMDb lookups, imgbox thumbnail hosting, and supports both movie and TV categories.
+> **Note:** I wrote this a while back when I was actively using it. Not sure if it still works with current API versions, but leaving it up in case anyone still finds it useful. The codebase was recently cleaned up and modularised — feel free to fork and adapt.
 
-## Prerequisites
-
-| Tool | Purpose | Install |
-|------|---------|---------|
-| Python | >= 3.11 | [python.org](https://www.python.org/downloads/) |
-| ffmpeg | Screenshot generation | `apt install ffmpeg` / `brew install ffmpeg` |
-| mktorrent | Torrent file creation | [github.com/Rudde/mktorrent](https://github.com/Rudde/mktorrent) |
-| mediainfo | Media metadata extraction | `apt install mediainfo` / `brew install mediainfo` |
-| imgbox-cli | Screenshot hosting | `pipx install imgbox-cli` |
+BHDUP automates the workflow of generating screenshots, extracting mediainfo, looking up metadata from TMDB/IMDb, and uploading via API. It handles batch processing of multiple releases with per-release error isolation.
 
 ## Quick Start
 
 ```bash
-# Clone the repo
 git clone https://github.com/h1n054ur/BHDUP.git
 cd BHDUP
-
-# Set up a virtual environment
 python3 -m venv .venv
 source .venv/bin/activate
-
-# Install dependencies
 pip install -e .
-
-# Configure
-cp .env.example .env
-# Edit .env with your API keys (see Configuration below)
 ```
 
 ## Configuration
 
-Edit `.env` with your credentials:
+Copy `.env.example` to `.env` and fill in your API keys:
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `TORRENTPASSKEY` | Yes | Your BHD torrent passkey |
-| `BHDAPI` | Yes | Your BHD API key |
-| `TMDBAPI` | Yes | TMDB v3 API key ([free registration](https://www.themoviedb.org/settings/api)) |
-| `SCREEN_SHOT1` - `SCREEN_SHOT6` | No | Screenshot timestamps in `HH:MM:SS` format (defaults provided) |
+| `TORRENTPASSKEY` | Yes | Your passkey |
+| `BHDAPI` | Yes | Upload API key |
+| `TMDBAPI` | Yes | TMDB v3 API key ([free](https://www.themoviedb.org/settings/api)) |
+| `SCREEN_SHOT1` - `SCREEN_SHOT6` | No | Screenshot timestamps (`HH:MM:SS`, defaults provided) |
 
 ## Usage
 
 ```bash
-# Run from a directory containing properly named release folders
-python3 bhdup.py
+# Interactive mode
+bhdup
+
+# Non-interactive (all flags)
+bhdup --category 1 --live 0 --anon 0
+
+# Dry run
+bhdup --category 2 --pack 1 --live 0 --anon 0 --dry-run
 ```
 
-The script will prompt for:
-- **Category**: Movie (1) or TV (2)
-- **Pack**: Season pack or single (TV only)
-- **Live**: Upload live or save as draft
-- **Anonymous**: Upload anonymously or not
+Run from a directory containing release folders. Each folder should have a video file inside.
 
-### Directory Structure
+## Requirements
+
+- Python >= 3.11
+- ffmpeg, mktorrent, mediainfo, imgbox-cli on PATH
+
+## Package Layout
 
 ```
-working-directory/
-├── Release.Name.2024.1080p.BluRay.Remux/
-│   └── movie.mkv
-├── Another.Release.2024.2160p.UHD.Remux/
-│   └── movie.mkv
-├── bhdup.py
-└── .env
+bhdup/
+  cli.py           Argument parsing and entry point
+  config.py        .env loading and validation
+  imgbox.py        Screenshot hosting output parsing
+  log.py           Structured logging
+  metadata.py      TMDB/IMDb lookups
+  paths.py         Path utilities
+  preflight.py     System binary checks
+  runner.py        Batch processing with error isolation
+  shell.py         Subprocess wrappers
+  types.py         Type definitions
 ```
 
-## Supported Formats
-
-- UHD Remux (2160p Blu-ray)
-- BD Remux (1080p Blu-ray)
-- DVD Remux
-- 2160p, 1080p, 720p
-- WEB sources
-
-> **Note:** Torrent piece size is currently hardcoded to `2^24` (16 MiB). This works well for most file sizes but may need tuning for very large or very small releases.
-
-## Cleanup
-
-If a run fails and leaves temp files:
+## Development
 
 ```bash
-rm -r *.files tmp *.png mediainfo.txt *.torrent
+pip install -e ".[dev]"
+pytest tests/ -v
+ruff check bhdup/ tests/
 ```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for full guidelines.
 
 ## License
 
